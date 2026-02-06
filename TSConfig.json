@@ -5,6 +5,6 @@
         "noEmitOnError": true,
         "noImplicitAny": true,
         "strict": true,
-        "outDir": "./dist/js"
+        "outDir": "./docs/js"
     }
 }
