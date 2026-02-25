@@ -339,7 +339,7 @@ function començar(diff: string, gameArea: HTMLElement) {
 
         // Exit button
         pauseBox.appendChild(createButton('Salir', () => {
-            window.location.href = 'game.html';
+            window.location.href = 'menu.html';
         }));
 
         pauseOverlay.appendChild(pauseBox);
@@ -450,7 +450,7 @@ function començar(diff: string, gameArea: HTMLElement) {
                 window.location.reload();
             }));
             pauseBox.appendChild(createButton('Salir', () => {
-                window.location.href = 'game.html';
+                window.location.href = 'menu.html';
             }));
         });
     }

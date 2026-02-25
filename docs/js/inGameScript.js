@@ -59,8 +59,8 @@ function començar(diff, gameArea) {
     startButton.style.display = 'none';
     const intervalMs = diff === 'Medium' ? 750 : diff === 'Difficult' ? 500 : 1000;
     const diameter = 120; // px
-    const approachScale = 3; // approach circle starts at diameter * approachScale
-    const approachDuration = intervalMs; // ms the approach circle takes to shrink to target
+    const approachScale = 3;
+    const approachDuration = intervalMs;
     let contador = 1;
     let zIndexCounter = 1;
     let totalScore = 0;
@@ -316,7 +316,7 @@ function començar(diff, gameArea) {
         }));
         // Exit button
         pauseBox.appendChild(createButton('Salir', () => {
-            window.location.href = 'game.html';
+            window.location.href = 'menu.html';
         }));
         pauseOverlay.appendChild(pauseBox);
         return { pauseOverlay, pauseBox };
@@ -415,7 +415,7 @@ function començar(diff, gameArea) {
                 window.location.reload();
             }));
             pauseBox.appendChild(createButton('Salir', () => {
-                window.location.href = 'game.html';
+                window.location.href = 'menu.html';
             }));
         });
     }

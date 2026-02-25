@@ -23,7 +23,7 @@ bOnu.addEventListener('mouseleave', () => {
 document.addEventListener('keydown', (e) => {
     if ((e.key === 'Enter' || e.key === ' ') && isPlayButtonHovered) {
         e.preventDefault();
-        window.location.href = 'game.html';
+        window.location.href = 'menu.html';
     }
     else if ((e.key === 'Enter' || e.key === ' ') && isOnuButtonHovered) {
         e.preventDefault();
@@ -39,13 +39,13 @@ playButton.addEventListener('mouseleave', () => {
 playButton.addEventListener('mousedown', () => {
     if (!isTrans) {
         isTrans = true;
-        window.location.href = 'game.html';
+        window.location.href = 'menu.html';
     }
 });
 playButton.addEventListener('touchstart', () => {
     if (!isTrans) {
         isTrans = true;
-        window.location.href = 'game.html';
+        window.location.href = 'menu.html';
     }
 });
 function verifyKey(event) {
@@ -80,3 +80,32 @@ function transformButtonOnu() {
     }
     isExpanded = !isExpanded;
 }
+let _cleanup = null;
+function setup() {
+    // Setup: attach listeners, start loops, etc.
+    const onClick = (e) => { };
+    document.getElementById('miBoton')?.addEventListener('click', onClick);
+    const rafId = requestAnimationFrame(function loop() {
+        // tu bucle o render
+        requestAnimationFrame(loop);
+    });
+    // devolver función de limpieza
+    return () => {
+        document.getElementById('miBoton')?.removeEventListener('click', onClick);
+        cancelAnimationFrame(rafId);
+    };
+}
+function init() {
+    if (_cleanup) {
+        _cleanup();
+        _cleanup = null;
+    }
+    _cleanup = setup();
+}
+document.addEventListener('DOMContentLoaded', init);
+window.addEventListener('pageshow', (e) => {
+    // si la página viene de bfcache, e.persisted === true
+    // pero es seguro llamar siempre a init()
+    init();
+});
+window.addEventListener('popstate', init); // opcional si usas history.pushState

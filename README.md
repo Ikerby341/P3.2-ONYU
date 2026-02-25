@@ -33,11 +33,11 @@ Aquesta aplicació està inspirada en el videojoc **OSU!**. Es tracta d'un joc r
 - **Teclat (16-24)**: [script.ts#L16-L24](src/script.ts#L16-L24) - Events de mousedown, touchstart, mouseenter, mouseleave i keydown dels botons
 - **Ratón (16-50)**: [script.ts#L16-L50](src/script.ts#L16-L50) - Clicks i hovers en els botons OÑU! i Play
 
-### gameScript.ts - Selector de Cançons
-- **Teclat (32-39)**: [gameScript.ts#L32-L39](src/gameScript.ts#L32-L39) - Listeners de keydown per validar Enter/Space
-- **Ratón (22-28)**: [gameScript.ts#L22-L28](src/gameScript.ts#L22-L28) - Clicks i hovers en botons de cançons
-- **Touch (23, 58-61)**: [gameScript.ts#L23,L58-L61](src/gameScript.ts#L23) - Events de touchstart i touch
-- **Botó Volver (89-114)**: [gameScript.ts#L89-L114](src/gameScript.ts#L89-L114) - Events per al botó inferior esquerra
+### menuScript.ts - Selector de Cançons
+- **Teclat (32-39)**: [menuScript.ts#L32-L39](src/menuScript.ts#L32-L39) - Listeners de keydown per validar Enter/Space
+- **Ratón (22-28)**: [menuScript.ts#L22-L28](src/menuScript.ts#L22-L28) - Clicks i hovers en botons de cançons
+- **Touch (23, 58-61)**: [menuScript.ts#L23,L58-L61](src/menuScript.ts#L23) - Events de touchstart i touch
+- **Botó Volver (89-114)**: [menuScript.ts#L89-L114](src/menuScript.ts#L89-L114) - Events per al botó inferior esquerra
 
 ### inGameScript.ts - Joc Principal
 - **Teclat (41-51, 107-162)**: [inGameScript.ts#L41-L51](src/inGameScript.ts#L41-L51) - Start button i keydown global
