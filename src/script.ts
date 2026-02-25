@@ -3,8 +3,29 @@ let isAnimating = false;
 let isTrans = false;
 let isOnuButtonHovered = false;
 let isPlayButtonHovered = false;
-const bOnu = document.getElementById('onu-button') as HTMLButtonElement;
-const playButton = document.getElementById('play-button') as HTMLButtonElement;
+
+const bOnuEl = document.getElementById('onu-button');
+const playButtonEl = document.getElementById('play-button');
+let optionsButtonEl = document.getElementById('options');
+
+if (!bOnuEl) throw new Error('Element with id "onu-button" not found in DOM');
+if (!playButtonEl) throw new Error('Element with id "play-button" not found in DOM');
+
+const bOnu = bOnuEl as HTMLButtonElement;
+const playButton = playButtonEl as HTMLButtonElement;
+
+let optionsButton: HTMLButtonElement;
+if (!optionsButtonEl) {
+    const fallback = document.createElement('button');
+    fallback.id = 'options';
+    fallback.textContent = 'Options';
+    fallback.style.display = 'none';
+    const menuContainer = document.getElementById('menu') || document.body;
+    menuContainer.appendChild(fallback);
+    optionsButton = fallback;
+} else {
+    optionsButton = optionsButtonEl as HTMLButtonElement;
+}
 
 bOnu.style.userSelect = 'none';
 bOnu.style.outline = 'none';
@@ -12,6 +33,10 @@ bOnu.style.outline = 'none';
 playButton.style.userSelect = 'none';
 playButton.style.outline = 'none';
 (playButton.style as any)['WebkitTapHighlightColor'] = 'transparent';
+optionsButton.style.userSelect = 'none';
+optionsButton.style.outline = 'none';
+(optionsButton.style as any)['WebkitTapHighlightColor'] = 'transparent';
+
 
 bOnu.addEventListener('mousedown', transformButtonOnu);
 bOnu.addEventListener('touchstart', transformButtonOnu);
@@ -63,9 +88,12 @@ function transformButtonOnu(this: HTMLButtonElement) {
     if (!isExpanded) {
         this.style.transform = 'translateX(-200px)';
         playButton.style.display = 'block';
+        optionsButton.style.display = 'block';
         setTimeout(() => {
             playButton.style.opacity = '1';
             playButton.style.transform = 'translate(-50%, -50%) scale(1)';
+            optionsButton.style.opacity = '1';
+            optionsButton.style.transform = 'translate(-50%, -50%) scale(1)';
             setTimeout(() => {
                 isAnimating = false;
             }, 500);
@@ -74,8 +102,11 @@ function transformButtonOnu(this: HTMLButtonElement) {
         this.style.transform = 'translateX(0)';
         playButton.style.opacity = '0';
         playButton.style.transform = 'translate(-50%, -50%) scale(0)';
+        optionsButton.style.opacity = '0';
+        optionsButton.style.transform = 'translate(-50%, -50%) scale(0)';
         setTimeout(() => {
             playButton.style.display = 'none';
+            optionsButton.style.display = 'none';
             isAnimating = false;
         }, 500);
     }
