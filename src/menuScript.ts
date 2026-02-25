@@ -120,6 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePositions();
 });
 
+// Si la página se restaura desde bfcache al usar atrás/adelante,
+// restaurar el estado necesario para que los botones respondan.
+window.addEventListener('pageshow', (e) => {
+    // siempre resetear la transición para permitir nuevas navegaciones
+    isTransitioning = false;
+    // limpiar hover por si quedó apuntando a un botón ya no válido
+    hoveredButton = null;
+    // opcional: resetear selección
+    selectedSong = null;
+    updatePositions();
+});
+
+window.addEventListener('popstate', () => {
+    isTransitioning = false;
+    hoveredButton = null;
+    selectedSong = null;
+    updatePositions();
+});
+
 function selectSong(song: string, button: HTMLButtonElement) {
     const songIndex = parseInt(button.dataset.index!);
 
