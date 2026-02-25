@@ -22,6 +22,20 @@ function prepareGame() {
         audio.src = audioPath;
         audio.id = 'game-audio';
         audio.className = 'hidden-audio';
+        // apply saved settings (volume and key)
+        try {
+            const raw = localStorage.getItem('osu_settings');
+            if (raw) {
+                const s = JSON.parse(raw);
+                if (typeof s.volume === 'number')
+                    audio.volume = s.volume;
+                if (typeof s.key === 'string')
+                    keyClickCircle = s.key;
+            }
+        }
+        catch (err) {
+            // ignore
+        }
         document.body.appendChild(audio);
         // Crear contenedor del área del juego para evitar que los círculos se corten
         const gameArea = document.createElement('div');
@@ -341,6 +355,13 @@ function començar(diff, gameArea) {
         slider.addEventListener('input', (e) => {
             const val = parseFloat(e.target.value);
             audio.volume = val / 100;
+            // persist
+            try {
+                const cur = JSON.parse(localStorage.getItem('osu_settings') || '{}');
+                cur.volume = audio.volume;
+                localStorage.setItem('osu_settings', JSON.stringify(cur));
+            }
+            catch (e) { }
         });
         pauseBox.appendChild(slider);
         const volumePercent = document.createElement('div');
@@ -379,6 +400,13 @@ function començar(diff, gameArea) {
             if (key.length === 1 || ['enter', ' ', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift', 'control', 'alt'].includes(key)) {
                 keyClickCircle = key === 'enter' ? 'enter' : key === ' ' ? ' ' : key;
                 keyInput.value = key === 'enter' ? 'ENTER' : key === ' ' ? 'SPACE' : key.toUpperCase();
+                // persist
+                try {
+                    const cur = JSON.parse(localStorage.getItem('osu_settings') || '{}');
+                    cur.key = keyClickCircle;
+                    localStorage.setItem('osu_settings', JSON.stringify(cur));
+                }
+                catch (e) { }
             }
         });
         pauseBox.appendChild(keyInput);
