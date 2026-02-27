@@ -64,3 +64,27 @@ body {
 .back-button:hover {
     transform: scale(1.1);
 }
+
+/* mobile adjustments for smaller screens */
+@media (max-width: 600px) {
+    .song-button {
+        width: 250px;
+        height: 60px;
+        font-size: 20px;
+        right: 10px;
+        padding-left: 10px;
+    }
+    .difficulty-button {
+        width: 200px;
+        height: 30px;
+        font-size: 16px;
+        right: 15px;
+    }
+    .back-button {
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+        bottom: 10px;
+        left: 10px;
+    }
+}
